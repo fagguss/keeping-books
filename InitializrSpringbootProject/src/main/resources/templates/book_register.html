@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book register</title>
+</head>
+<body>
+    <header>
+        <h1>GUARDAR NUEVO LIBRO :)</h1>
+    </header>
+    <main>
+        <section>
+            <article>
+                <form action="/book/register" method="POST" enctype="multipart/form-data">
+                    
+                    <label for="disabledTextInput" class="form-label">Titulo</label>
+                    <input type="text" id="Titulo" class="form-control" 
+                    placeholder="Titulo completo" name="tittle">
+                    
+                    <br>
+                    <label for="disabledTextInput" class="form-label">ISBN</label>
+                    <input type="text" id="isbn" class="form-control" name="isbn">
+                    
+                    <br>
+                    <label for="disabledTextInput" class="form-label">Año</label>
+                    <input type="text" id="year" class="form-control" name="year">
+                    
+                    <br>
+                    <label for="disabledTextInput" class="form-label">Copias</label>
+                    <input type="text" id="copias" class="form-control"
+                    placeholder="Numero de ejemplares" name="copies">
+                    
+                    <br>
+                    <label for="disabledTextInput" class="form-label">Ejemplares prestados</label>
+                    <input type="text" id="borrowedCopies" class="form-control" name="borrowedCopies">
+                    
+                    <br>
+                    <label for="disabledTextInput" class="form-label">Ejemplares restantes</label>
+                    <input type="text" id="remainingCopies" class="form-control" name="remainingCopies">
+                    <br>
+                    
+                    <label for="disabledTextInput" class="form-label">AUTOR</label>
+                    <input type="text" id="author" class="form-control" name="author">
+                    <br>
+                    <label for="disabledTextInput" class="form-label">EDITORIAL</label>
+                    <input type="text" id="editorial" class="form-control" name="editorial">
+                    <br>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </form>
+            </article>
+        </section>
+    </main>
+</body>
+</html>
