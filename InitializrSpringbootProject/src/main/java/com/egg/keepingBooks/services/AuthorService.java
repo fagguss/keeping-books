@@ -5,6 +5,7 @@ package com.egg.keepingBooks.services;
 import com.egg.keepingBooks.entities.Author;
 import com.egg.keepingBooks.exeptions.ErrorService;
 import com.egg.keepingBooks.repositories.AuthorRepo;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,12 @@ public class AuthorService {
 
     }
     
+    @Transactional
+    public List<Author> listAuthors(){
+        return authorRepo.findAll(); 
+    }
+    
+    
 //    @Transactional
 //    public void delate(String author){
 //        
@@ -56,6 +63,8 @@ public class AuthorService {
 //        authorRepo.delete(author);
 //    }
 //    
+    
+    
      //Validaciones 
     public void validate(String name) throws ErrorService {
 

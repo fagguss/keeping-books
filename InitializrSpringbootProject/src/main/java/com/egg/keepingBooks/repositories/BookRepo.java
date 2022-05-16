@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 @Repository
 public interface BookRepo extends JpaRepository<Book, String>{
     
-    @Query("SELECT b FROM Book b where b.isbn=:isbn")
-    public Book findBookByIsbn(@Param("isbn") String isbn); 
+    @Query("SELECT b FROM Book b WHERE b.id=:id")
+    public Book findBookById(@Param("id") String id); 
     
 }

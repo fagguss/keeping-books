@@ -6,9 +6,9 @@ import com.egg.keepingBooks.entities.Editorial;
 import com.egg.keepingBooks.exeptions.ErrorService;
 import com.egg.keepingBooks.repositories.BookRepo;
 import java.util.Optional;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookService {
@@ -16,8 +16,8 @@ public class BookService {
     @Autowired
     private BookRepo bookRepo;
 
-    @Transactional
-    public void register(Long isbn, String title, Integer year,
+    @Transactional 
+    public Book register(Long isbn, String title, Integer year,
             Integer copies, Integer borrowedCopies, Integer remainingCopies,
             Author author, Editorial editorial) throws ErrorService {
 
@@ -30,16 +30,21 @@ public class BookService {
         book.setCopies(copies);
         book.setBorrowedCopies(borrowedCopies);
         book.setRemainingCopies(remainingCopies);
+        book.setActive(true);
+        
+        
+        book.setAuthor(author);
+        book.setEditorial(editorial);
 
-        bookRepo.save(book);
+        return bookRepo.save(book);
 
     }
 
-    @Transactional
-    public void consult(String isbn) {
-
-        bookRepo.findBookByIsbn(isbn);
-    }
+//    @Transactional
+//    public void consult(String isbn) {
+//
+//        bookRepo.findBookByIsbn(isbn);
+//    }
 
     @Transactional
     public void modify(String id, Long isbn, String title, Integer year, Integer copies, Integer borrowedCopies, Integer remainingCopies) throws ErrorService {

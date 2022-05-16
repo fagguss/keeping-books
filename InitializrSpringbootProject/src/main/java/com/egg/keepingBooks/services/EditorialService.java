@@ -5,6 +5,7 @@ package com.egg.keepingBooks.services;
 import com.egg.keepingBooks.entities.Editorial;
 import com.egg.keepingBooks.exeptions.ErrorService;
 import com.egg.keepingBooks.repositories.EditorialRepo;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,11 @@ public class EditorialService {
     public void delate(Editorial editorial){
         
         editorialRepo.delete(editorial);
+    }
+    
+    @Transactional
+    public List<Editorial> listEditorials(){
+        return editorialRepo.findAll(); 
     }
     
      //Validaciones 
