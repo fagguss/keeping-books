@@ -30,11 +30,11 @@ public class ControllerAuthor {
 
         try {
             authorService.register(name);
-            model.addAttribute("exito", "registro exitoso");
+            model.put("exito", "registro exitoso");
 
         }
         catch(Exception e){
-            model.addAttribute("error", "el registro no se ha llevado a cabo correctamente");
+            model.put("error", "el registro no se ha llevado a cabo correctamente");
         }
 
         return "author_register";
