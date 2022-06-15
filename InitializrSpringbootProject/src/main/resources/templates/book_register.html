@@ -16,8 +16,11 @@
         </header>
         <main>
             <section>
-                <ar ticle>
+                <article>
                     <form action="/book/register" method="POST" enctype="multipart/form-data">
+                        
+                        <p th:if="${exito!=null}" th:text="${exito}"></p>
+                        <p th:if="${error!=null}" th:text="${error}"></p>
 
                         <label for="disabledTextInput" class="form-label">Titulo</label>
                         <input type="text" id="Titulo" class="form-control" 
@@ -46,14 +49,14 @@
                         <br>
 
                         <label>AUTOR</label>
-                        <select class="form-control" name="author"> 
-                            <option th:each="auth : ${author}" th:text="${auth.getName()}"></option> 
+                        <select class="form-control" name="idAuthor"> 
+                            <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name}"></option> 
                         </select>
                         
                         <br>
                         <label>EDITORIAL</label>
-                        <select class="form-control" name="editorial"> 
-                            <option th:each="edit : ${editorial}" th:text="${edit.getName()}"></option> 
+                        <select class="form-control" name="idEditorial"> 
+                            <option th:each="editorial : ${editorials}" th:value="${editorial.id}" th:text="${editorial.name}"></option> 
                         </select>
                         <br>
                             

@@ -52,7 +52,13 @@ public class AuthorService {
     
     @Transactional
     public List<Author> listAuthors(){
-        return authorRepo.findAll(); 
+        List<Author> authors=authorRepo.findAll(); 
+        return authors; 
+    }
+    
+    @Transactional 
+    public Author findAuthor(String id){
+        return authorRepo.findAuthorById(id); 
     }
     
     
@@ -65,7 +71,7 @@ public class AuthorService {
 //    
     
     
-     //Validaciones 
+     //---------------------------------Validaciones----------------------------
     public void validate(String name) throws ErrorService {
 
         if (name == null | name.isEmpty()) {

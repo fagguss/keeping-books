@@ -4,7 +4,9 @@ import com.egg.keepingBooks.entities.Book;
 import com.egg.keepingBooks.entities.Author;
 import com.egg.keepingBooks.entities.Editorial;
 import com.egg.keepingBooks.exeptions.ErrorService;
+import com.egg.keepingBooks.repositories.AuthorRepo;
 import com.egg.keepingBooks.repositories.BookRepo;
+import com.egg.keepingBooks.repositories.EditorialRepo;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +18,24 @@ public class BookService {
 
     @Autowired
     private BookRepo bookRepo;
+    
+    @Autowired
+    private AuthorRepo authorRepo;
 
-    @Transactional 
+    @Autowired
+    private EditorialRepo editorialRepo;
+
+    @Transactional
     public Book register(Long isbn, String title, Integer year,
             Integer copies, Integer borrowedCopies, Integer remainingCopies,
-            Author author, Editorial editorial) throws ErrorService {
+            String idAuthor, String idEditorial) throws ErrorService {
 
-        validate(isbn, title, year, copies, borrowedCopies, remainingCopies);
+        validate(isbn, title, year, copies, borrowedCopies, remainingCopies, idAuthor, idEditorial);
 
+        Author author=authorRepo.findAuthorById(idAuthor); 
+        Editorial editorial=editorialRepo.findAuthorById(idEditorial); 
         Book book = new Book();
+        
         book.setIsbn(isbn);
         book.setTittle(title);
         book.setYear(year);
@@ -32,8 +43,6 @@ public class BookService {
         book.setBorrowedCopies(borrowedCopies);
         book.setRemainingCopies(remainingCopies);
         book.setActive(true);
-        
-        
         book.setAuthor(author);
         book.setEditorial(editorial);
 
@@ -47,15 +56,17 @@ public class BookService {
 //        bookRepo.findBookByIsbn(isbn);
 //    }
     
+    
     @Transactional
-    public List<Book> listBooks(){
-        return bookRepo.findAll(); 
+    public List<Book> listBooks() {
+        return bookRepo.findAll();
     }
 
     @Transactional
-    public void modify(String id, Long isbn, String title, Integer year, Integer copies, Integer borrowedCopies, Integer remainingCopies) throws ErrorService {
+    public void modify(String id, Long isbn, String title, Integer year, Integer copies,
+            Integer borrowedCopies, Integer remainingCopies, String author, String editorial) throws ErrorService {
 
-        validate(isbn, title, year, copies, borrowedCopies, remainingCopies);
+        validate(isbn, title, year, copies, borrowedCopies, remainingCopies,author, editorial);
 
         Optional<Book> resp = bookRepo.findById(id);
 
@@ -84,7 +95,8 @@ public class BookService {
     }
 
     //Validaciones 
-    public void validate(Long isbn, String title, Integer year, Integer copies, Integer borrowedCopies, Integer remainingCopies) throws ErrorService {
+    public void validate(Long isbn, String title, Integer year, Integer copies,
+            Integer borrowedCopies, Integer remainingCopies, String idAuthor, String idEditorial) throws ErrorService {
 
         if (isbn == null) {
             throw new ErrorService("Has to be a non-null isbn");
@@ -94,7 +106,7 @@ public class BookService {
             throw new ErrorService("Has to be a non-null title");
         }
 
-        if (year == null) {
+        if (year == null ) {
             throw new ErrorService("Has to be a non-null year");
         }
 
@@ -110,6 +122,13 @@ public class BookService {
             throw new ErrorService("Has to be a non-null remaining copies");
         }
 
+        if (idAuthor == null | idAuthor.isEmpty()) {
+            throw new ErrorService("Author no designado");
+        }
+        
+        if (idEditorial == null | idEditorial.isEmpty()) {
+            throw new ErrorService("Editorial no designada");
+        }
     }
 
 }

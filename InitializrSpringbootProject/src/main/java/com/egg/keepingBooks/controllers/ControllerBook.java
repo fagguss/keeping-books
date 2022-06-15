@@ -29,26 +29,29 @@ public class ControllerBook {
 
     @GetMapping("/register")
     public String form(ModelMap model) {
-        model.addAttribute("author", authorService.listAuthors()); 
-        model.addAttribute("editorial", editorialService.listEditorials()); 
+        
+        model.addAttribute("authors", authorService.listAuthors()); 
+        model.addAttribute("editorials", editorialService.listEditorials()); 
         return "book_register";
     }
 
     @PostMapping("/register")
     public String save(ModelMap model, @RequestParam String tittle, @RequestParam Long isbn,
             @RequestParam Integer year, @RequestParam Integer copies, @RequestParam Integer borrowedCopies,
-            @RequestParam Integer remainingCopies, @RequestParam Author author, @RequestParam Editorial editorial)
+            @RequestParam Integer remainingCopies, @RequestParam String idAuthor, @RequestParam String idEditorial)
             throws ErrorService {
         try {
 
-            bookService.register(isbn, tittle, year, copies, borrowedCopies, remainingCopies, author, editorial);
+            bookService.register(isbn, tittle, year, copies, borrowedCopies, remainingCopies, idAuthor, idEditorial);
             
-            model.put("Exito", "El libro a sido registrado con exito!");
-        }catch (Exception e){
-            model.put("Error", "El libro no a sido registrado correctamente");
+            model.put("exito", "El libro a sido registrado con exito!");
+            
+        }catch (ErrorService e){
+            model.put("error", e.getMessage());
+            return "book_register";
         }
-
         
-        return "book_register"; 
+        return "book_register";
+
     }
 }

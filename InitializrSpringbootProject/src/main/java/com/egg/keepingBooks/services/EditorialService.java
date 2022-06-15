@@ -58,7 +58,8 @@ public class EditorialService {
     
     @Transactional
     public List<Editorial> listEditorials(){
-        return editorialRepo.findAll(); 
+        List<Editorial> editorials=editorialRepo.findAll(); 
+        return editorials; 
     }
     
      //Validaciones 
