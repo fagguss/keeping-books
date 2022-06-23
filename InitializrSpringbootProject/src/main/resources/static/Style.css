@@ -1,0 +1,16 @@
+
+header{
+    font-family: 'Abril Fatface', cursive;
+    font-weight:900; 
+
+    padding-left: 500px;
+    padding-right: 400px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+
+    background-image: url("fondoHeader.jpg");  
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    background-size: cover; 
+}
